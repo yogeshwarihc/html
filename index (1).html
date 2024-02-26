@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            text-decoration: underline;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .doctor-card {
+            text-align: center;
+            max-width: 200px; 
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-image {
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .doctor-details {
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .doctor-name {
+            font-weight: bold;
+        }
+
+        .doctor-profession {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Doctor</h1>
+    <div class="image-container" id="imageContainer"></div>
+
+    <script>
+        
+        const doctorData = [
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. John Doe", "profession": "Cardiologist" },
+            { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg", "name": "Dr. Jane Smith", "profession": "Pediatrician" },
+           
+        ];
+
+       
+        function loadDoctors() {
+            const imageContainer = document.getElementById('imageContainer');
+            let currentRow;
+
+            doctorData.forEach((data, index) => {
+                if (index % 4 === 0) {
+                   
+                    currentRow = document.createElement('div');
+                    currentRow.classList.add('row');
+                    imageContainer.appendChild(currentRow);
+                }
+
+                const doctorCard = document.createElement('div');
+                doctorCard.classList.add('doctor-card');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = data.image;
+                imgElement.alt = `Doctor Image ${index + 1}`;
+                imgElement.classList.add('user-image');
+
+                const doctorDetails = document.createElement('div');
+                doctorDetails.classList.add('doctor-details');
+
+                const doctorName = document.createElement('div');
+                doctorName.classList.add('doctor-name');
+                doctorName.textContent = data.name;
+
+                const doctorProfession = document.createElement('div');
+                doctorProfession.classList.add('doctor-profession');
+                doctorProfession.textContent = data.profession;
+
+                doctorDetails.appendChild(doctorName);
+                doctorDetails.appendChild(doctorProfession);
+
+                doctorCard.appendChild(imgElement);
+                doctorCard.appendChild(doctorDetails);
+
+                currentRow.appendChild(doctorCard);
+            });
+        }
+
+        
+        window.addEventListener('load', loadDoctors);
+    </script>
+</body>
+</html>
